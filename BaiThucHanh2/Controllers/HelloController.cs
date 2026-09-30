@@ -13,7 +13,7 @@ public class HelloController : ControllerBase
         return Ok(new
         {
             Message = "Hello World",
-            AccessedBy = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value
+            AccessedBy = User.Identity?.Name ?? User.Claims.FirstOrDefault(c => c.Type == "UserName" || c.Type == "sub" || c.Type == System.Security.Claims.ClaimTypes.Name)?.Value
         });
     }
 }

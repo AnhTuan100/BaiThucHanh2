@@ -47,7 +47,8 @@ public class AuthController : ControllerBase
     [HttpGet("auth")]
     public IActionResult VerifyAuth()
     {
-        var userName = User.Identity?.Name ?? User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+        var userName = User.Identity?.Name 
+                       ?? User.Claims.FirstOrDefault(c => c.Type == "UserName" || c.Type == "sub")?.Value;
         var idUser = User.Claims.FirstOrDefault(c => c.Type == "IdUser")?.Value;
 
         return Ok(new
