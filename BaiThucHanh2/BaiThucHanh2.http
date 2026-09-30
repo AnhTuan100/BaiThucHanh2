@@ -1,10 +1,26 @@
 ### Cấu hình Host theo đúng cổng của server đang chạy
 @baseUrl = http://localhost:5194
 
-### -----------------------------------------------------------
-### YÊU CẦU 1: Đăng nhập để lấy Token (POST /login)
+### ===========================================================
+### YÊU CẦU 1A: Đăng nhập tại Root URL (POST localhost:****/) theo đúng đề bài
 ### Password "123456" đã mã hóa MD5 = e10adc3949ba59abbe56e057f20f883e
-### -----------------------------------------------------------
+### ===========================================================
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "e10adc3949ba59abbe56e057f20f883e"
+}
+
+> {%
+    client.global.set("authToken", response.body.token);
+%}
+
+
+### ===========================================================
+### YÊU CẦU 1B: Đăng nhập tại endpoint /login (POST localhost:****/login)
+### ===========================================================
 POST {{baseUrl}}/login
 Content-Type: application/json
 
@@ -14,29 +30,35 @@ Content-Type: application/json
 }
 
 > {%
-    // Rider tự động lấy token từ kết quả trả về và lưu vào biến authToken
     client.global.set("authToken", response.body.token);
 %}
 
 
-### -----------------------------------------------------------
+### ===========================================================
 ### YÊU CẦU 2: Middleware chặn API "Hello World" khi KHÔNG có Token
 ### Mong đợi kết quả: 401 Unauthorized
-### -----------------------------------------------------------
+### ===========================================================
+GET {{baseUrl}}/hello
+
+### Thử nghiệm với route /api/hello khi KHÔNG có Token
 GET {{baseUrl}}/api/hello
 
 
-### -----------------------------------------------------------
+### ===========================================================
 ### YÊU CẦU 3: Middleware xác thực và cho phép đi qua khi CÓ Token
 ### Mong đợi kết quả: 200 OK kèm thông điệp "Hello World"
-### -----------------------------------------------------------
+### ===========================================================
+GET {{baseUrl}}/hello
+Authorization: Bearer {{authToken}}
+
+### Thử nghiệm với route /api/hello khi CÓ Token
 GET {{baseUrl}}/api/hello
 Authorization: Bearer {{authToken}}
 
 
-### -----------------------------------------------------------
-### YÊU CẦU 4: API xác thực Token (GET /auth)
+### ===========================================================
+### YÊU CẦU 4: API xác thực Token (GET localhost:****/auth)
 ### Mong đợi kết quả: 200 OK kèm IdUser và UserName giải mã từ JWT
-### -----------------------------------------------------------
+### ===========================================================
 GET {{baseUrl}}/auth
 Authorization: Bearer {{authToken}}

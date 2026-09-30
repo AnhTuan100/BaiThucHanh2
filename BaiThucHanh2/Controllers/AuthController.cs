@@ -1,4 +1,4 @@
-﻿using BaiThucHanh2.DTOs;
+using BaiThucHanh2.DTOs;
 using BaiThucHanh2.Models;
 using BaiThucHanh2.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +20,7 @@ public class AuthController : ControllerBase
         _jwtService = jwtService;
     }
 
+    [HttpPost("")]
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)
     {

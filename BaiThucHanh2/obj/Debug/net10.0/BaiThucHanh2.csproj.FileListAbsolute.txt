@@ -37,3 +37,9 @@ C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\refint\BaiT
 C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\BaiThucHanh2.pdb
 C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\BaiThucHanh2.genruntimeconfig.cache
 C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\ref\BaiThucHanh2.dll
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\BaiThucHanh2.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\obj\Debug\net10.0\BaiThucHanh2.sourcelink.json
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\X\RiderProjects\BaiThucHanh2\BaiThucHanh2\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll

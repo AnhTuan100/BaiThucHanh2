@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using BaiThucHanh2.Models;
@@ -14,13 +14,20 @@ public interface IJwtService
 
 public class JwtService : IJwtService
 {
-    private const string SecretKey = "KhoaBiMatChoBaiThucHanhSo2Rider2026RatBaoMat!";
-    private const string Issuer = "BaiThucHanh2";
-    private const string Audience = "ClientApp";
+    private readonly string _secretKey;
+    private readonly string _issuer;
+    private readonly string _audience;
+
+    public JwtService(IConfiguration configuration)
+    {
+        _secretKey = configuration["Jwt:Key"] ?? "KhoaBiMatChoBaiThucHanhSo2Rider2026RatBaoMat!";
+        _issuer = configuration["Jwt:Issuer"] ?? "BaiThucHanh2";
+        _audience = configuration["Jwt:Audience"] ?? "ClientApp";
+    }
 
     public string GenerateToken(User user)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -31,8 +38,8 @@ public class JwtService : IJwtService
         };
 
         var token = new JwtSecurityToken(
-            issuer: Issuer,
-            audience: Audience,
+            issuer: _issuer,
+            audience: _audience,
             claims: claims,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: credentials
@@ -44,7 +51,7 @@ public class JwtService : IJwtService
     public ClaimsPrincipal? ValidateToken(string token)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(SecretKey);
+        var key = Encoding.UTF8.GetBytes(_secretKey);
 
         try
         {
@@ -53,9 +60,9 @@ public class JwtService : IJwtService
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = true,
-                ValidIssuer = Issuer,
+                ValidIssuer = _issuer,
                 ValidateAudience = true,
-                ValidAudience = Audience,
+                ValidAudience = _audience,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
             }, out _);

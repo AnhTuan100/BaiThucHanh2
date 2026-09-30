@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BaiThucHanh2.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Route("hello")]
 public class HelloController : ControllerBase
 {
     [HttpGet]

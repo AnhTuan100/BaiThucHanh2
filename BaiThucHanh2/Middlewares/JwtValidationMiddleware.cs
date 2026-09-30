@@ -1,4 +1,4 @@
-﻿using BaiThucHanh2.Services;
+using BaiThucHanh2.Services;
 
 namespace BaiThucHanh2.Middlewares;
 
@@ -13,9 +13,9 @@ public class JwtValidationMiddleware
 
     public async Task InvokeAsync(HttpContext context, IJwtService jwtService)
     {
-        var path = context.Request.Path.Value?.ToLower() ?? "";
+        var path = context.Request.Path.Value?.TrimEnd('/').ToLower() ?? "";
         
-        if (path.Equals("/auth") || path.Contains("/api/hello"))
+        if (path.Equals("/auth") || path.Equals("/hello") || path.Equals("/api/hello"))
         {
             var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
 
